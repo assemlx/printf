@@ -3,6 +3,43 @@
 #include <stddef.h>
 
 /**
+ * print_char - print a single character
+ * @args: the va_list containing the character to print
+ *
+ * Return: the number of characters printed
+ */
+int print_char(va_list args)
+{
+	char c = va_arg(args, int);
+
+	_putchar(c);
+	return (1);
+}
+
+/**
+ * print_string - print a string of characters
+ * @args: the va_list containing the string to print
+ *
+ * Return: the number of characters printed
+ */
+int print_string(va_list args)
+{
+	char *str = va_arg(args, char*);
+	int len = 0;
+
+	if (str == NULL)
+		str = "(null)";
+
+	while (str[len])
+	{
+		_putchar(str[len]);
+		len++;
+	}
+
+	return (len);
+}
+
+/**
  * print_number - print an integer number
  * @args: the va_list containing the number to print
  *
