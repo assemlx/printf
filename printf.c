@@ -110,3 +110,53 @@ int print_binary(va_list args)
 
 	return (len);
 }
+
+/**
+ * _printf - produces output according to a format
+ * @format: the format string
+ *
+ * Return: the number of characters printed
+ */
+int _printf(const char *format, ...)
+{
+	va_list args;
+	int len = 0, i = 0;
+
+	va_start(args, format);
+	while (format[i])
+	{
+		if (format[i] == '%')
+		{
+			i++;
+			if (format[i] == '\0')
+				break;
+			if (format[i] == '%')
+			{
+				_putchar('%');
+				len++;
+			}
+			else if (format[i] == 'c')
+				len += print_char(args);
+			else if (format[i] == 's')
+				len += print_string(args);
+			else if (format[i] == 'd' || format[i] == 'i')
+				len += print_number(args);
+			else if (format[i] == 'b')
+				len += print_binary(args);
+			else
+			{
+				_putchar('%');
+				_putchar(format[i]);
+				len += 2;
+			}
+		}
+		else
+		{
+			_putchar(format[i]);
+			len++;
+		}
+		i++;
+	}
+	va_end(args);
+	return (len);
+}
